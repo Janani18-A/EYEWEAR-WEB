@@ -589,6 +589,119 @@
             display: none !important;
         }
     }
+
+    /* ─── LOGO SLIDE ANIMATION FIXED ─── */
+    .logo-slide {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        height: 2rem;
+        position: relative;
+        text-decoration: none;
+        width: fit-content;
+    }
+
+    .logo-text {
+        display: block;
+        font-weight: 800;
+        font-size: 1.6rem;
+        letter-spacing: -0.5px;
+        color: #0F3D2E;
+        line-height: 2rem;
+        white-space: nowrap;
+        animation: slideText 6s ease-in-out infinite;
+        position: relative;
+        transform: translateY(0);
+    }
+
+    .logo-clone {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-weight: 800;
+        font-size: 1.6rem;
+        letter-spacing: -0.5px;
+        color: #0F3D2E;
+        line-height: 2rem;
+        white-space: nowrap;
+        animation: slideClone 6s ease-in-out infinite;
+        transform: translateY(100%);
+    }
+
+    @keyframes slideText {
+        0%, 20% { transform: translateY(0); }
+        45%, 65% { transform: translateY(-100%); }
+        90%, 100% { transform: translateY(0); }
+    }
+
+    @keyframes slideClone {
+        0%, 20% { transform: translateY(100%); }
+        45%, 65% { transform: translateY(0); }
+        90%, 100% { transform: translateY(100%); }
+    }
+
+    /* ─── Logout overlay ─── */
+    .logout-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 61, 46, 0.5);
+        backdrop-filter: blur(5px);
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    .logout-overlay.active { opacity: 1; pointer-events: all; }
+    .logout-dialog {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        max-width: 300px;
+        width: 90%;
+    }
+    .logout-dialog h5 { color: #0F3D2E; margin-bottom: 1rem; }
+    .logout-dialog .btn { margin: 0.5rem; }
+
+    /* ─── SVG Hover Animations ─── */
+    .home-icon:hover .door-panel {
+        transform: scaleX(0.2) translateX(6px);
+        transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transform-origin: left center;
+    }
+    .home-icon:hover .door-knob { opacity: 0; transition: opacity 0.3s; }
+    .home-icon .door-panel { transition: transform 0.3s ease; transform: scaleX(1) translateX(0); }
+    .home-icon .door-knob { transition: opacity 0.3s; }
+
+    .bag-icon-new:hover .bag-flap-new {
+        transform: translateY(-3px) scaleY(0.6);
+        transform-origin: top;
+        transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .bag-icon-new .bag-flap-new { transition: transform 0.3s ease; transform: translateY(0) scaleY(1); }
+
+    .box-icon:hover .box-top-flap { animation: topFlap 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    @keyframes topFlap { 0% { transform: rotate(0deg); } 50% { transform: rotate(-20deg); } 100% { transform: rotate(0deg); } }
+
+    .search-icon:hover .search-lens { transform: scale(1.4); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .search-icon .search-lens { transition: transform 0.3s ease; transform: scale(1); transform-origin: center; }
+
+    .heart-icon:hover .heart-path { animation: heartBeat 0.7s ease 2; }
+    @keyframes heartBeat { 0%,100% { transform: scale(1); } 15% { transform: scale(1.3); } 30% { transform: scale(1); } 45% { transform: scale(1.2); } 60% { transform: scale(1); } }
+
+    .basket-icon:hover .basket-wheel { animation: wheelRoll 0.7s ease-in-out; }
+    @keyframes wheelRoll { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .basket-icon .basket-wheel { transform-origin: center; }
+
+    .profile-icon:hover .profile-head { animation: headBump 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    @keyframes headBump { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-6px) scale(1.1); } }
 </style>
 
 <!-- ============================================================ -->
