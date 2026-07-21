@@ -1,0 +1,707 @@
+/* ================================================================
+   OPTIQ STYLE.CSS – PREMIUM LUXURY (FINAL)
+   Cream Background | Emerald Glass | Gold Accents
+   ================================================================ */
+
+:root {
+    /* ============================================================
+       COLOR PALETTE
+       ============================================================ */
+    --primary: #0F3D2E;           /* Deep Emerald – Buttons, CTAs */
+    --primary-dark: #0A2A1F;      /* Darker Emerald – Hover */
+    --primary-light: #1B5E4A;     /* Lighter Emerald – Gradient */
+    --accent: #C8A951;            /* Champagne Gold – Prices, Stars ONLY */
+    --accent-dark: #B8973F;       /* Darker Gold */
+    --cream: #F7F5F0;             /* Premium Cream – Page Background */
+    --white: #FFFFFF;             /* Pure White – Cards */
+    --dark: #1A1A1A;              /* Deep Black – Primary Text */
+    --muted: #8A8A8A;             /* Soft Grey – Secondary Text */
+    --lightgray: #F0EDE8;         /* Light Grey – Borders */
+
+    /* ============================================================
+       GLASS / WATERY TRANSPARENCY
+       ============================================================ */
+    --glass-bg: rgba(255, 255, 255, 0.55);
+    --glass-border: rgba(200, 169, 81, 0.06);
+    --glass-blur: 20px;
+    --glass-shadow: 0 20px 60px rgba(0, 0, 0, 0.03);
+
+    /* ============================================================
+       LUXURY SHADOWS
+       ============================================================ */
+    --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.02), 0 0 0 1px rgba(200, 169, 81, 0.015);
+    --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.03), 0 20px 60px rgba(0, 0, 0, 0.02), 0 0 0 1px rgba(200, 169, 81, 0.02);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.04), 0 30px 80px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(200, 169, 81, 0.03);
+    --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.05), 0 50px 120px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(200, 169, 81, 0.04);
+    --shadow-btn: 0 8px 30px rgba(15, 61, 46, 0.08), 0 0 0 1px rgba(200, 169, 81, 0.02);
+    --shadow-btn-hover: 0 16px 50px rgba(15, 61, 46, 0.15), 0 0 0 1px rgba(200, 169, 81, 0.04);
+
+    /* ============================================================
+       EASING – PREMIUM SLOW-MO
+       ============================================================ */
+    --ease-luxury: cubic-bezier(0.23, 1, 0.32, 1);
+    --transition-slow: 0.7s var(--ease-luxury);
+    --transition-medium: 0.5s var(--ease-luxury);
+    --transition-fast: 0.3s var(--ease-luxury);
+
+    /* ============================================================
+       LEGACY SUPPORT
+       ============================================================ */
+    --navy: #0F3D2E;
+    --gold: #C8A951;
+}
+
+/* ================================================================
+   GLOBAL – CREAM BACKGROUND
+   ================================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    background: var(--cream);
+    color: var(--dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, .heading-font {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+/* ================================================================
+   NAVBAR – EMERALD GLASS
+   ================================================================ */
+.navbar {
+    background: rgba(15, 61, 46, 0.92) !important;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand {
+    color: var(--accent) !important;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.navbar .nav-link:hover {
+    color: var(--accent) !important;
+}
+.nav-icon {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.nav-icon:hover {
+    color: var(--accent);
+}
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--accent);
+    color: var(--primary);
+    font-size: 0.6rem;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ================================================================
+   BUTTONS – EMERALD GRADIENT + GLASSY WATERY HOVER
+   ================================================================ */
+.btn-emerald {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    border: none;
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-btn);
+    transition: all var(--transition-slow);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(4px);
+}
+.btn-emerald::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+}
+.btn-emerald:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-btn-hover);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: var(--white);
+}
+.btn-emerald:hover::before {
+    opacity: 1;
+}
+.btn-emerald:active {
+    transform: scale(0.96);
+}
+
+.btn-outline-emerald {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    font-weight: 600;
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    transition: all var(--transition-medium);
+    box-shadow: 0 0 0 1px transparent;
+}
+.btn-outline-emerald:hover {
+    background: var(--primary);
+    color: var(--white);
+    box-shadow: 0 12px 40px rgba(15, 61, 46, 0.12);
+    transform: translateY(-3px);
+    border-color: transparent;
+}
+
+/* ----- GOLD BUTTON (LEGACY – USE SPARINGLY) ----- */
+.btn-gold {
+    background: var(--accent);
+    color: var(--primary);
+    font-weight: 700;
+    border: none;
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    transition: all var(--transition-medium);
+    box-shadow: 0 4px 20px rgba(200, 169, 81, 0.1);
+}
+.btn-gold:hover {
+    background: var(--accent-dark);
+    color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(200, 169, 81, 0.2);
+}
+
+.btn-outline-gold {
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-weight: 700;
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    background: transparent;
+    transition: all var(--transition-medium);
+}
+.btn-outline-gold:hover {
+    background: var(--accent);
+    color: var(--primary);
+    box-shadow: 0 8px 30px rgba(200, 169, 81, 0.12);
+    transform: translateY(-3px);
+}
+
+/* ================================================================
+   ADD TO CART – EMERALD WITH GLASSY HOVER
+   ================================================================ */
+.add-to-cart {
+    background: var(--primary);
+    color: var(--white);
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    transition: all var(--transition-medium);
+    box-shadow: 0 4px 20px rgba(15, 61, 46, 0.06);
+    backdrop-filter: blur(4px);
+    position: relative;
+    overflow: hidden;
+}
+.add-to-cart::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.add-to-cart:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(15, 61, 46, 0.2), 0 0 30px rgba(15, 61, 46, 0.04);
+    backdrop-filter: blur(8px);
+}
+.add-to-cart:hover::before {
+    opacity: 1;
+}
+
+/* ================================================================
+   GLASS CARDS – WATERY TRANSPARENCY
+   ================================================================ */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-slow);
+}
+.glass-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(200, 169, 81, 0.12);
+}
+
+/* ================================================================
+   PRODUCT CARDS – LIGHT GLASS
+   ================================================================ */
+.product-card {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(200, 169, 81, 0.05);
+    border-radius: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-slow);
+}
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(200, 169, 81, 0.02);
+}
+.product-card img {
+    transition: transform 0.7s ease;
+}
+.product-card:hover img {
+    transform: scale(1.04);
+}
+
+.product-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--accent);
+    color: var(--primary);
+    font-size: 0.55rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(200, 169, 81, 0.15);
+}
+
+/* ================================================================
+   PROMISE CARDS – GLASSY
+   ================================================================ */
+.promise-card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(200, 169, 81, 0.05);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    transition: all var(--transition-slow);
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+}
+.promise-card:hover {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(24px);
+    border-color: rgba(200, 169, 81, 0.12);
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+.promise-card:hover .promise-heading {
+    color: var(--primary) !important;
+}
+.promise-card:hover .promise-icon {
+    color: var(--accent) !important;
+}
+.promise-card:hover .promise-link {
+    color: var(--accent) !important;
+}
+.promise-card:hover .promise-icon-bg {
+    background: rgba(200, 169, 81, 0.12) !important;
+}
+
+/* ================================================================
+   TESTIMONIAL CARDS – GLASSY
+   ================================================================ */
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(200, 169, 81, 0.04);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all var(--transition-medium);
+    box-shadow: var(--shadow-sm);
+}
+.testimonial-card:hover {
+    border-color: rgba(200, 169, 81, 0.12);
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-6px);
+}
+
+/* ================================================================
+   HERO CAROUSEL
+   ================================================================ */
+.hero-carousel-wrap {
+    background: var(--cream);
+    padding: 4rem 0;
+}
+.hero-carousel {
+    max-width: 90%;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    background: transparent;
+}
+.hero-carousel .carousel-inner {
+    width: 100%;
+}
+.hero-carousel .carousel-item {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.hero-carousel .carousel-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.hero-carousel .carousel-indicators {
+    bottom: 20px;
+    gap: 8px;
+    z-index: 5;
+}
+.hero-carousel .carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+.hero-carousel .carousel-indicators button.active {
+    background: var(--accent);
+    width: 30px;
+    border-radius: 10px;
+}
+.hero-carousel .carousel-control-prev,
+.hero-carousel .carousel-control-next {
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(15, 61, 46, 0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.hero-carousel:hover .carousel-control-prev,
+.hero-carousel:hover .carousel-control-next {
+    opacity: 1;
+}
+.hero-carousel .carousel-control-prev { left: 16px; }
+.hero-carousel .carousel-control-next { right: 16px; }
+
+/* ================================================================
+   NEW ARRIVALS
+   ================================================================ */
+.new-arrivals-track {
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.new-arrival-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.new-arrival-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+}
+.new-arrival-arrow {
+    transition: all 0.3s ease;
+    border: 2px solid var(--lightgray) !important;
+    background: var(--white) !important;
+}
+.new-arrival-arrow:hover {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+}
+.new-arrival-arrow:hover i {
+    color: var(--white) !important;
+}
+.new-arrival-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #CBD5E1;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.new-arrival-dot.active {
+    background: var(--accent);
+    width: 30px;
+    border-radius: 10px;
+}
+
+/* ================================================================
+   FLOATING GLASSES
+   ================================================================ */
+.floating-glasses {
+    color: var(--accent);
+    animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(-3deg); }
+    75% { transform: translateY(4px) rotate(3deg); }
+}
+
+/* ================================================================
+   GRID ANIMATION
+   ================================================================ */
+.grid-item {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.grid-item.animate {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ================================================================
+   SHAPE CIRCLE
+   ================================================================ */
+.shape-circle:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 20px rgba(200, 169, 81, 0.3);
+}
+.shape-circle:hover .shape-img {
+    transform: scale(1.15) rotate(8deg);
+}
+
+/* ================================================================
+   SCROLL REVEAL
+   ================================================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s var(--ease-luxury);
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================================================================
+   SHIMMER
+   ================================================================ */
+.shimmer {
+    position: relative;
+    overflow: hidden;
+}
+.shimmer::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+    animation: shimmer 2s infinite;
+}
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%); }
+    100% { transform: translateX(100%) translateY(100%); }
+}
+
+/* ================================================================
+   SCROLL CONTAINER
+   ================================================================ */
+.scroll-container {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    cursor: grab;
+    -ms-overflow-style: none;
+    scrollbar-width: thin;
+    padding-bottom: 10px;
+}
+.scroll-container:active { cursor: grabbing; }
+.scroll-container::-webkit-scrollbar { height: 5px; }
+.scroll-container::-webkit-scrollbar-track { background: transparent; border-radius: 10px; }
+.scroll-container::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+
+/* ================================================================
+   ICON SPIN
+   ================================================================ */
+.icon-spin {
+    animation: iconSpin 0.6s ease;
+}
+@keyframes iconSpin {
+    0%   { transform: rotate(0deg); color: var(--primary); }
+    30%  { color: var(--accent); }
+    100% { transform: rotate(360deg); color: var(--primary); }
+}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+.footer {
+    background: var(--primary);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 -4px 40px rgba(0, 0, 0, 0.02);
+}
+.footer-link {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+}
+.footer-link:hover {
+    color: var(--accent);
+}
+
+/* ================================================================
+   SEARCH OVERLAY
+   ================================================================ */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.search-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+.search-overlay-backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 61, 46, 0.92);
+    backdrop-filter: blur(12px);
+}
+.search-overlay-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 2rem;
+}
+.search-overlay-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.search-overlay-close:hover {
+    transform: rotate(90deg);
+    color: var(--white);
+}
+.glass-search-bar {
+    display: flex;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 60px;
+    overflow: hidden;
+}
+.glass-search-bar input {
+    box-shadow: none;
+    outline: none;
+    background: transparent;
+    color: var(--white);
+}
+.glass-search-bar input::placeholder {
+    color: rgba(255,255,255,0.3);
+}
+.glass-search-bar .btn-gold {
+    border-radius: 50px;
+    margin: 5px;
+}
+
+/* ================================================================
+   UTILITY CLASSES
+   ================================================================ */
+.bg-cream { background-color: var(--cream) !important; }
+.bg-white { background-color: var(--white) !important; }
+.bg-primary { background-color: var(--primary) !important; }
+.bg-secondary { background-color: var(--secondary) !important; }
+.bg-accent { background-color: var(--accent) !important; }
+.bg-light { background-color: var(--lightgray) !important; }
+
+.text-primary { color: var(--primary) !important; }
+.text-secondary { color: var(--secondary) !important; }
+.text-accent { color: var(--accent) !important; }
+.text-dark { color: var(--dark) !important; }
+.text-muted-custom { color: var(--muted) !important; }
+.text-white-50 { color: rgba(255,255,255,0.5) !important; }
+.text-white-70 { color: rgba(255,255,255,0.7) !important; }
+.text-white-80 { color: rgba(255,255,255,0.8) !important; }
+
+/* ----- LEGACY SUPPORT (Old classes still work) ----- */
+.bg-navy { background-color: var(--primary) !important; }
+.text-navy { color: var(--primary) !important; }
+.text-gold { color: var(--accent) !important; }
+.bg-gold { background-color: var(--accent) !important; }
+
+.object-fit-contain { object-fit: contain !important; }
+.object-fit-cover { object-fit: cover !important; }
+
+/* ================================================================
+   RESPONSIVE – KEPT ONLY WHAT'S VISUALLY ESSENTIAL
+   ================================================================ */
+@media (max-width: 768px) {
+    .carousel-slide h1 { font-size: 2rem !important; }
+    .testimonial-card { min-width: 300px !important; }
+    /* FONT SIZE ONLY – kept because it's visual */
+    .btn-emerald, .btn-outline-emerald { font-size: 0.8rem; }
+}
+
+@media (max-width: 576px) {
+    /* Only font sizes and essential visual overrides kept */
+    .hero-carousel-wrap { padding: 1rem 0; } /* Will be replaced with Bootstrap py-3, but keeping for now */
+}
