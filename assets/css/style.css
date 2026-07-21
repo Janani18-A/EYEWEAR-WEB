@@ -2,6 +2,9 @@
    OPTIQ STYLE.CSS – PREMIUM LUXURY (FINAL)
    Cream Background | Emerald Glass | Gold Accents
    ================================================================ */
+   html{
+    scroll-behavior: smooth;
+   }
 
 :root {
     /* ============================================================

@@ -1,4 +1,4 @@
-<!-- navbar.php – Centered Glass Pill + Mobile Search Left of Hamburger -->
+<!-- navbar.php – Centered Glass Pill + Hamburger X ON TOP of Overlay (ANIMATION FIXED) -->
 <nav class="navbar navbar-expand-lg fixed-top cream-navbar">
     <div class="container-fluid px-3 px-lg-4 d-flex align-items-center position-relative">
 
@@ -16,9 +16,9 @@
             </a>
         </div>
 
-        <!-- ===== CENTER: Glass Pill (ABSOLUTELY CENTERED) ===== -->
-        <div class="nav-pill-wrapper d-none d-lg-block" style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 1; padding: 0.2rem 1rem;">
-            <ul class="navbar-nav nav-pill flex-row align-items-center gap-1 p-1" style="margin: 0; padding: 0.3rem 0.6rem;">
+        <!-- ===== CENTER: Glass Pill (Desktop) ===== -->
+        <div class="nav-pill-wrapper d-none d-lg-block" style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 1; padding: 0.2rem 1rem; margin-top: 4px;">
+            <ul class="navbar-nav nav-pill flex-row align-items-center gap-1 p-1" style="margin: 0; padding: 0.4rem 1rem;">
                 <!-- HOME -->
                 <li class="nav-item">
                     <a class="nav-link active d-flex flex-column align-items-center gap-1 py-1 px-3" href="index.php" data-tab="home">
@@ -46,7 +46,7 @@
                                 <text class="new-tag-text" x="12" y="12" font-size="4" font-weight="700" fill="#FFFFFF" text-anchor="middle" font-family="Arial, sans-serif">NEW</text>
                             </svg>
                         </div>
-                        <span class="nav-label">New</span>
+                        <span class="nav-label">New Arrivals</span>
                     </a>
                 </li>
                 <!-- CATEGORIES -->
@@ -72,7 +72,7 @@
             </ul>
         </div>
 
-        <!-- ===== RIGHT: Desktop Icons + Mobile Search + Hamburger ===== -->
+        <!-- ===== RIGHT: Icons + Mobile Search + Hamburger ===== -->
         <div class="d-flex align-items-center gap-2 ms-auto" style="flex: 0 0 auto; z-index: 2;">
             <!-- Search – desktop -->
             <a href="#" class="nav-icon d-none d-lg-inline-flex" id="openSearchOverlay">
@@ -120,7 +120,7 @@
                 </ul>
             </div>
 
-            <!-- ===== MOBILE SEARCH – Left of Hamburger ===== -->
+            <!-- ===== MOBILE SEARCH ===== -->
             <a href="#" class="nav-icon d-lg-none" id="openSearchOverlayMobile">
                 <svg class="tab-icon search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle class="search-ring" cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/>
@@ -129,8 +129,8 @@
                 </svg>
             </a>
 
-            <!-- Hamburger – always on right -->
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <!-- ===== HAMBURGER ===== -->
+            <button class="navbar-toggler border-0 hamburger-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
                 <span class="hamburger-frame">
                     <span class="line line1"></span>
                     <span class="line line2"></span>
@@ -228,16 +228,17 @@
 <!-- STYLES                                                       -->
 <!-- ============================================================ -->
 <style>
-    /* ─── Base Navbar – increased height ─── */
+    /* ─── Base Navbar ─── */
     .cream-navbar {
         background: #F7F5F0 !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
         border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         box-shadow: 0 2px 16px rgba(0, 0, 0, 0.02);
-        padding-top: 14px;   /* increased */
-        padding-bottom: 14px; /* increased */
+        padding-top: 16px;
+        padding-bottom: 16px;
         transition: all 0.3s ease;
+        z-index: 1030 !important;
     }
     .cream-navbar.scrolled {
         background: #f0eee8 !important;
@@ -261,6 +262,8 @@
         position: relative;
         overflow: hidden;
         transition: all 0.4s ease;
+        margin-top: 4px;
+        padding: 0.4rem 1rem;
     }
     .nav-pill::before {
         content: '';
@@ -452,7 +455,7 @@
         border-top: 1px solid rgba(15, 61, 46, 0.06);
     }
 
-    /* ─── Hamburger → Cross ─── */
+    /* ─── Hamburger → Cross with .open class ─── */
     .hamburger-frame {
         position: relative;
         width: 22px;
@@ -471,6 +474,20 @@
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         transform-origin: center;
     }
+    /* ─── Cross shape when open ─── */
+    .navbar-toggler.open .hamburger-frame .line1 {
+        transform: translateY(7px) rotate(45deg);
+        width: 100%;
+    }
+    .navbar-toggler.open .hamburger-frame .line2 {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    .navbar-toggler.open .hamburger-frame .line3 {
+        transform: translateY(-7px) rotate(-45deg);
+        width: 100%;
+    }
+    /* Fallback for Bootstrap's aria-expanded */
     .navbar-toggler[aria-expanded="true"] .hamburger-frame .line1 {
         transform: translateY(7px) rotate(45deg);
         width: 100%;
@@ -484,108 +501,28 @@
         width: 100%;
     }
 
-    /* ─── Logo slide ─── */
-    .logo-slide {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        overflow: hidden;
-        height: 2rem;
-        position: relative;
-        text-decoration: none;
-    }
-    .logo-text {
-        display: block;
-        font-weight: 800;
-        font-size: 1.6rem;
-        letter-spacing: -0.5px;
-        color: #0F3D2E;
-        line-height: 2rem;
-        white-space: nowrap;
-        animation: slideText 6s ease-in-out infinite;
-    }
-    .logo-clone {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        line-height: 2rem;
-        animation: slideClone 6s ease-in-out infinite;
-    }
-    @keyframes slideText {
-        0%, 20% { transform: translateY(0); }
-        45%, 65% { transform: translateY(-100%); }
-        90%, 100% { transform: translateY(0); }
-    }
-    @keyframes slideClone {
-        0%, 20% { transform: translateY(0); }
-        45%, 65% { transform: translateY(-100%); }
-        90%, 100% { transform: translateY(0); }
+    /* ─── Floating hamburger when menu open ─── */
+    .hamburger-toggle.floating {
+        position: fixed !important;
+        top: 18px !important;
+        right: 18px !important;
+        z-index: 99999 !important;
+        background: rgba(247, 245, 240, 0.9) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border-radius: 50% !important;
+        width: 44px !important;
+        height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+        border: 1px solid rgba(0, 0, 0, 0.04) !important;
+        pointer-events: auto !important;
     }
 
-    /* ─── Logout overlay ─── */
-    .logout-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(15, 61, 46, 0.5);
-        backdrop-filter: blur(5px);
-        z-index: 2000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-    }
-    .logout-overlay.active { opacity: 1; pointer-events: all; }
-    .logout-dialog {
-        background: white;
-        padding: 2rem;
-        border-radius: 20px;
-        text-align: center;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-        max-width: 300px;
-        width: 90%;
-    }
-    .logout-dialog h5 { color: #0F3D2E; margin-bottom: 1rem; }
-    .logout-dialog .btn { margin: 0.5rem; }
-
-    /* ─── SVG Hover Animations ─── */
-    .home-icon:hover .door-panel {
-        transform: scaleX(0.2) translateX(6px);
-        transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        transform-origin: left center;
-    }
-    .home-icon:hover .door-knob { opacity: 0; transition: opacity 0.3s; }
-    .home-icon .door-panel { transition: transform 0.3s ease; transform: scaleX(1) translateX(0); }
-    .home-icon .door-knob { transition: opacity 0.3s; }
-
-    .bag-icon-new:hover .bag-flap-new {
-        transform: translateY(-3px) scaleY(0.6);
-        transform-origin: top;
-        transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .bag-icon-new .bag-flap-new { transition: transform 0.3s ease; transform: translateY(0) scaleY(1); }
-
-    .box-icon:hover .box-top-flap { animation: topFlap 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
-    @keyframes topFlap { 0% { transform: rotate(0deg); } 50% { transform: rotate(-20deg); } 100% { transform: rotate(0deg); } }
-
-    .search-icon:hover .search-lens { transform: scale(1.4); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
-    .search-icon .search-lens { transition: transform 0.3s ease; transform: scale(1); transform-origin: center; }
-
-    .heart-icon:hover .heart-path { animation: heartBeat 0.7s ease 2; }
-    @keyframes heartBeat { 0%,100% { transform: scale(1); } 15% { transform: scale(1.3); } 30% { transform: scale(1); } 45% { transform: scale(1.2); } 60% { transform: scale(1); } }
-
-    .basket-icon:hover .basket-wheel { animation: wheelRoll 0.7s ease-in-out; }
-    @keyframes wheelRoll { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    .basket-icon .basket-wheel { transform-origin: center; }
-
-    .profile-icon:hover .profile-head { animation: headBump 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-    @keyframes headBump { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-6px) scale(1.1); } }
-
-    /* ─── Responsive ─── */
+    /* ─── Mobile Overlay ─── */
     @media (max-width: 991.98px) {
         .navbar-collapse {
             position: fixed;
@@ -605,29 +542,63 @@
             transform: translateX(100%);
             transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
             opacity: 0;
-            z-index: 1040;
+            z-index: 1040 !important;
             border: none;
             box-shadow: none;
         }
-        .navbar-collapse.show { transform: translateX(0); opacity: 1; }
-        .navbar-collapse .mobile-overlay-menu { display: flex !important; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
-        .navbar-toggler { z-index: 1050; }
-        .mobile-overlay-menu .nav-link { font-size: 1.2rem; padding: 0.6rem 1rem; }
-        .mobile-overlay-menu .nav-link .nav-label { font-size: 0.9rem; }
-        .cream-navbar .d-lg-none#openSearchOverlayMobile { display: inline-flex !important; }
-        /* Hide the absolute pill on mobile */
-        .nav-pill-wrapper { display: none !important; }
+        .navbar-collapse.show { 
+            transform: translateX(0); 
+            opacity: 1; 
+        }
+        .navbar-collapse .mobile-overlay-menu { 
+            display: flex !important; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            width: 100%; 
+            height: 100%; 
+        }
+        
+        /* ─── Mobile nav links – DARK TEXT ─── */
+        .mobile-overlay-menu .nav-link .nav-label {
+            color: rgba(15, 61, 46, 0.9) !important;
+            font-weight: 700 !important;
+            font-size: 1.2rem !important;
+            text-transform: none !important;
+            letter-spacing: 0.5px !important;
+        }
+        .mobile-overlay-menu .nav-link.active .nav-label {
+            color: #0F3D2E !important;
+            font-weight: 800 !important;
+        }
+        .mobile-overlay-menu .nav-link svg {
+            color: rgba(15, 61, 46, 0.7) !important;
+        }
+        .mobile-overlay-menu .nav-link.active svg {
+            color: #0F3D2E !important;
+        }
+
+        /* ─── Hide desktop elements on mobile ─── */
+        .cream-navbar .d-lg-none#openSearchOverlayMobile { 
+            display: inline-flex !important; 
+        }
+        .nav-pill-wrapper { 
+            display: none !important; 
+        }
+        .cream-navbar .d-none.d-lg-inline-flex {
+            display: none !important;
+        }
     }
 </style>
 
 <!-- ============================================================ -->
-<!-- SCRIPTS                                                       -->
+<!-- SCRIPTS – Hamburger Floating + Animation Sync                -->
 <!-- ============================================================ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
 
-        // ─── Search overlay ─────────────────────────────────────
+        // ─── SEARCH OVERLAY ─────────────────────────────────────
         const searchOverlayTriggers = document.querySelectorAll('#openSearchOverlay, #openSearchOverlayMobile');
         searchOverlayTriggers.forEach(trigger => {
             trigger.addEventListener('click', function(e) {
@@ -644,7 +615,7 @@
             });
         });
 
-        // ─── Profile dropdown ───────────────────────────────────
+        // ─── PROFILE DROPDOWN ───────────────────────────────────
         var toggle = document.getElementById('profileToggle');
         var menu = document.getElementById('profileMenu');
         if (toggle && menu) {
@@ -666,7 +637,7 @@
             });
         }
 
-        // ─── Navbar scroll ──────────────────────────────────────
+        // ─── NAVBAR SCROLL ──────────────────────────────────────
         var navbar = document.querySelector('.cream-navbar');
         if (navbar) {
             window.addEventListener('scroll', function() {
@@ -678,7 +649,7 @@
             });
         }
 
-        // ─── Active tab ─────────────────────────────────────────
+        // ─── ACTIVE TAB ─────────────────────────────────────────
         const navLinks = document.querySelectorAll('.nav-link');
         function setActiveTab(tab) {
             navLinks.forEach(link => {
@@ -722,7 +693,7 @@
             }
         });
 
-        // ─── Badge updates ──────────────────────────────────────
+        // ─── BADGE UPDATES ──────────────────────────────────────
         const cartBadge = document.querySelector('.cart-badge');
         if (cartBadge) {
             const count = parseInt(localStorage.getItem('optiq_cartCount')) || 0;
@@ -735,7 +706,47 @@
             wishlistBadge.style.display = count > 0 ? 'flex' : 'none';
         }
 
-        // ─── Logout ─────────────────────────────────────────────
+        // ─── HAMBURGER FLOATING BUTTON + ANIMATION SYNC ──────
+        const hamburger = document.querySelector('.navbar-toggler');
+        const navbarCollapse = document.getElementById('navbarNav');
+
+        if (hamburger && navbarCollapse) {
+            // When menu opens → move hamburger to body + add .open class
+            navbarCollapse.addEventListener('show.bs.collapse', function() {
+                // Move to body
+                document.body.appendChild(hamburger);
+                hamburger.classList.add('floating');
+                hamburger.classList.add('open');
+                hamburger.setAttribute('aria-expanded', 'true');
+            });
+
+            // When menu closes → move hamburger back + remove .open class
+            navbarCollapse.addEventListener('hide.bs.collapse', function() {
+                const rightIcons = document.querySelector('.d-flex.align-items-center.gap-2.ms-auto');
+                if (rightIcons) {
+                    rightIcons.appendChild(hamburger);
+                }
+                hamburger.classList.remove('floating');
+                hamburger.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+
+            // Click handler to toggle the collapse manually if needed
+            hamburger.addEventListener('click', function(e) {
+                // Let Bootstrap handle the toggle via data-bs-toggle
+                // But we need to update aria-expanded manually to ensure CSS sync
+                const isOpen = navbarCollapse.classList.contains('show');
+                if (isOpen) {
+                    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                    if (bsCollapse) bsCollapse.hide();
+                } else {
+                    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                    if (bsCollapse) bsCollapse.show();
+                }
+            });
+        }
+
+        // ─── LOGOUT ─────────────────────────────────────────────
         const logoutLink = document.getElementById('logoutLink');
         if (logoutLink) {
             logoutLink.addEventListener('click', function(e) {
@@ -770,6 +781,6 @@
             });
         }
 
-        console.log('✅ Navbar with centered pill, increased height, and search left of hamburger loaded!');
+        console.log('✅ Navbar loaded!');
     });
 </script>
