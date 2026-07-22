@@ -170,10 +170,11 @@
             margin: 0 auto;
             border-radius: 14px;
         }
-        .bento-title { font-size: 0.85rem; line-height: 1.1; }
-        .bento-desc { font-size: 0.55rem; margin-bottom: 4px; }
-        .bento-btn { font-size: 0.5rem; padding: 3px 10px; gap: 3px; }
-        .bento-content { padding: 14px 10px 10px 10px; }
+        .bento-title { font-size: 0.7rem; line-height: 1.1; }
+        .bento-desc { font-size: 0.3rem; margin-bottom: 2px; }
+        .bento-btn { font-size: 0.25rem; padding: 2px 6px;  }
+        .bento-content {   padding: 8px 12px 6px 12px !important;  /* ← INCREASED LEFT & RIGHT PADDING */
+        margin: -10px -12px -10px -12px !important;  }
         .bento-card { padding: 10px 12px; border-radius: 12px; }
     }
     .test{
