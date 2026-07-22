@@ -1,5 +1,5 @@
 <?php
-// orders.php – Premium My Orders Page (Clean, No Scooter)
+// orders.php – Premium My Orders Page (No Buy Button)
 include 'templates/header.php';
 include 'templates/navbar.php';
 ?>
@@ -280,9 +280,7 @@ include 'templates/navbar.php';
                                     <a href="track-order.php?id=${order.id}" class="btn btn-sm btn-outline-emerald" style="font-size: clamp(0.55rem, 0.9vw, 0.7rem); padding: 0.15rem 0.5rem;">
                                         <i class="bi bi-truck me-1" style="font-size: clamp(0.45rem, 0.7vw, 0.6rem);"></i> Track
                                     </a>
-                                    <button class="btn btn-sm btn-emerald buy-again-btn" data-order-id="${order.id}" data-product-id="${firstProduct.id}" style="font-size: clamp(0.55rem, 0.9vw, 0.7rem); padding: 0.15rem 0.5rem;">
-                                        <i class="bi bi-arrow-repeat me-1" style="font-size: clamp(0.45rem, 0.7vw, 0.6rem);"></i> Buy
-                                    </button>
+                                    <!-- Buy button removed here -->
                                     <button class="btn btn-sm btn-outline-secondary invoice-btn" data-order-id="${order.id}" style="font-size: clamp(0.55rem, 0.9vw, 0.7rem); padding: 0.15rem 0.5rem;">
                                         <i class="bi bi-file-pdf me-1" style="font-size: clamp(0.45rem, 0.7vw, 0.6rem);"></i> PDF
                                     </button>
@@ -308,7 +306,7 @@ include 'templates/navbar.php';
                 clearProps: 'transform'
             });
 
-            attachBuyAgain();
+            // No attachBuyAgain() – removed
             attachInvoice();
             attachReview();
             attachCancel();
@@ -333,49 +331,7 @@ include 'templates/navbar.php';
             });
         }
 
-        function attachBuyAgain() {
-            document.querySelectorAll('.buy-again-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const orderId = this.dataset.orderId;
-                    const productId = this.dataset.productId;
-                    const orders = getOrders();
-                    const order = orders.find(o => o.id === orderId);
-                    if (!order) return;
-                    const product = order.products.find(p => p.id === productId);
-                    if (!product) return;
-
-                    let cart = JSON.parse(localStorage.getItem('optiq_cart')) || [];
-                    const existing = cart.find(item => item.id === product.id);
-                    if (existing) existing.qty = (existing.qty || 1) + 1;
-                    else cart.push({ ...product, qty: 1 });
-                    localStorage.setItem('optiq_cart', JSON.stringify(cart));
-                    const totalQty = cart.reduce((s, i) => s + (i.qty || 1), 0);
-                    localStorage.setItem('optiq_cartCount', totalQty);
-                    if (typeof updateCartBadge === 'function') updateCartBadge(totalQty);
-
-                    const cartIcon = document.querySelector('.cart-icon');
-                    if (cartIcon && product.image) {
-                        const btnRect = this.getBoundingClientRect();
-                        const flyingImg = document.createElement('img');
-                        flyingImg.src = product.image;
-                        flyingImg.style.cssText =
-                            `position:fixed;z-index:9999;width:50px;height:50px;object-fit:cover;border-radius:12px;pointer-events:none;left:${btnRect.left+btnRect.width/2-25}px;top:${btnRect.top-10}px;opacity:1;box-shadow:0 20px 60px rgba(0,0,0,0.3);transition:all 0.8s cubic-bezier(0.34,1.2,0.64,1);`;
-                        document.body.appendChild(flyingImg);
-                        const cartRect = cartIcon.getBoundingClientRect();
-                        setTimeout(() => {
-                            flyingImg.style.left = (cartRect.left + cartRect.width/2 - 15) + 'px';
-                            flyingImg.style.top = (cartRect.top + cartRect.height/2 - 15) + 'px';
-                            flyingImg.style.width = '25px';
-                            flyingImg.style.height = '25px';
-                            flyingImg.style.opacity = '0.5';
-                            flyingImg.style.transform = 'scale(0.3) rotate(360deg)';
-                            setTimeout(() => { flyingImg.remove(); }, 600);
-                        }, 150);
-                    }
-                    showToast(`${product.name} added to cart!`);
-                });
-            });
-        }
+        // attachBuyAgain() function removed entirely
 
         function attachInvoice() {
             document.querySelectorAll('.invoice-btn').forEach(btn => {
@@ -572,7 +528,7 @@ include 'templates/navbar.php';
         renderOrders('all', '');
         attachEvents();
 
-        console.log('📦 My Orders page ready (clean, no scooter)');
+        console.log('📦 My Orders page ready (Buy button removed)');
     });
 </script>
 

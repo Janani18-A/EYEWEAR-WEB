@@ -1,4 +1,4 @@
-<!-- search-overlay.php – Premium Search Modal (Transparent Background) -->
+<!-- search-overlay.php – Premium Search Modal with GSAP Staggered Suggestions -->
 <div class="search-overlay d-none" id="searchOverlay">
     <!-- ===== NO BACKDROP BACKGROUND – Only blur overlay ===== -->
     <div class="search-overlay-backdrop" id="searchOverlayBackdrop"></div>
@@ -19,31 +19,23 @@
                         What are you looking for?
                     </h2>
                     
-                    <!-- Search Bar -->
-                    <div class="search-overlay-bar glass-search-bar">
-                        <input type="text" id="overlaySearchInput" class="form-control bg-transparent border-0 text-dark placeholder-white-50 fs-6 py-3 px-3" 
-                               placeholder="Search frames, styles, or colours…" autofocus>
-                        <button class="btn btn-emerald px-3 py-2 fs-6" id="overlaySearchBtn">
-                            <i class="bi bi-search"></i>
-                        </button>
+                    <!-- Search Bar + Suggestions Dropdown -->
+                    <div class="search-wrapper" style="position: relative;">
+                        <div class="search-overlay-bar glass-search-bar">
+                            <input type="text" id="overlaySearchInput" class="form-control bg-transparent border-0 text-dark placeholder-white-50 fs-6 py-3 px-3" 
+                                   placeholder="Search frames, styles, or colours…" autofocus>
+                            <button class="btn btn-emerald px-3 py-2 fs-6" id="overlaySearchBtn">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+
+                        <!-- Suggestions Dropdown (Glass, Staggered) -->
+                        <div class="suggestions-dropdown" id="searchSuggestions" style="display:none;">
+                            <!-- Dynamic items -->
+                        </div>
                     </div>
                     
-                    <!-- Intent Chips -->
-                    <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
-                        <?php
-                        $intents = [
-                            ['icon'=>'💼','label'=>'Office'],
-                            ['icon'=>'✨','label'=>'Fashion'],
-                            ['icon'=>'🎮','label'=>'Gaming'],
-                            ['icon'=>'📚','label'=>'Reading'],
-                            ['icon'=>'🕶','label'=>'Travel'],
-                            ['icon'=>'🏃','label'=>'Sports'],
-                        ];
-                        foreach($intents as $intent):
-                        ?>
-                        <a href="search.php?q=<?= urlencode($intent['label']); ?>" class="btn glass-pill text-dark" style="font-size: 1rem; padding: 0.4rem 1rem;"><?= $intent['icon']; ?> <?= $intent['label']; ?></a>
-                        <?php endforeach; ?>
-                    </div>
+                    <!-- ===== INTENT CHIPS REMOVED ===== -->
                     
                     <!-- Browse All -->
                     <p class="text-white-50 text-center mt-3 small" style="font-size: 1.3rem;">
@@ -56,7 +48,7 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- ===== STYLES – Transparent Background + Blur ===== -->
+<!-- ===== STYLES – Premium Glass + Dropdown ===== -->
 <!-- ============================================================ -->
 <style>
     /* ================================================================
@@ -86,7 +78,7 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        background: transparent !important; /* ← REMOVED dark background */
+        background: transparent !important;
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         transition: backdrop-filter 0.5s ease;
@@ -106,7 +98,6 @@
         pointer-events: none;
     }
 
-    /* ----- Container Allows Click Through, But Box Catches Clicks ----- */
     .search-overlay-content .container {
         max-width: 580px;
         margin: 0 auto;
@@ -117,7 +108,6 @@
         pointer-events: none;
     }
 
-    /* ----- Glass Box Inner (The Modal) – Catches all clicks ----- */
     .search-overlay-content .glass-box-inner {
         background: rgba(255, 255, 255, 0.04);
         backdrop-filter: blur(24px);
@@ -133,21 +123,17 @@
         position: relative;
     }
 
-    /* ----- Scrollbar (Premium Subtle) ----- */
     .search-overlay-content .glass-box-inner::-webkit-scrollbar {
         width: 4px;
     }
-
     .search-overlay-content .glass-box-inner::-webkit-scrollbar-track {
         background: transparent;
     }
-
     .search-overlay-content .glass-box-inner::-webkit-scrollbar-thumb {
         background: rgba(200, 169, 81, 0.2);
         border-radius: 10px;
     }
 
-    /* ===== CLOSE BUTTON INSIDE BOX (Top-Right Corner) ===== */
     .search-overlay-close {
         position: absolute;
         top: 16px;
@@ -171,17 +157,10 @@
     }
 
     @keyframes overlayFadeUp {
-        0% {
-            opacity: 0;
-            transform: translateY(20px) scale(0.96);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        0% { opacity: 0; transform: translateY(20px) scale(0.96); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* ----- Glass Search Bar ----- */
     .glass-search-bar {
         display: flex;
         align-items: center;
@@ -206,8 +185,8 @@
         box-shadow: none;
         outline: none;
         background: transparent !important;
-        color: rgba(0, 0, 0, 0.85) !important; /* Dark text with good contrast */
-        font-weight: 500; /* Slightly bolder */
+        color: rgba(0, 0, 0, 0.85) !important;
+        font-weight: 500;
         letter-spacing: 0.3px;
         padding: 0.8rem 1.2rem;
         font-size: 1rem;
@@ -223,11 +202,10 @@
         outline: none !important;
     }
 
-    /* ----- Search Button (Emerald) – inline on all screens ----- */
     .search-overlay .btn-emerald {
         flex-shrink: 0;
         background: linear-gradient(135deg, var(--primary, #0F3D2E), var(--primary-light, #1B5E4A));
-        color: #1A1A1A; /* Black text */
+        color: #1A1A1A;
         font-family: 'Poppins', sans-serif;
         font-weight: 600;
         border: none;
@@ -269,30 +247,88 @@
         transform: scale(0.96);
     }
 
-    /* ----- Glass Pill (Intent Chips) ----- */
-    .glass-pill {
-        background: rgba(255, 255, 255, 0.04);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        color: rgba(0, 0, 0, 0.5);
-        font-weight: 400;
-        padding: 0.4rem 1rem;
-        border-radius: 50px;
-        text-decoration: none;
-        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        font-size: 0.8rem;
+    /* ===== SUGGESTIONS DROPDOWN (Glass) ===== */
+    .suggestions-dropdown {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 16px;
+        border: 1px solid rgba(200, 169, 81, 0.08);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        z-index: 10600;
+        max-height: 220px;
+        overflow-y: auto;
+        display: none;
+        padding: 0.2rem 0;
     }
 
-    .glass-pill:hover {
-        background: rgba(200, 169, 81, 0.08);
-        border-color: rgba(200, 169, 81, 0.15);
-        color: #ffffff;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    .suggestions-dropdown.show {
+        display: block;
     }
 
-    /* ----- Browse All Link (Dark) ----- */
+    .suggestion-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.6rem 1.2rem;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+        transition: background 0.2s ease;
+    }
+
+    .suggestion-item:last-child {
+        border-bottom: none;
+    }
+
+    .suggestion-item:hover {
+        background: rgba(200, 169, 81, 0.06);
+    }
+
+    .suggestion-item .product-img {
+        width: 36px;
+        height: 36px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        flex-shrink: 0;
+    }
+
+    .suggestion-item .product-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .suggestion-item .product-name {
+        font-weight: 600;
+        color: #0F3D2E;
+        font-size: 0.85rem;
+    }
+
+    .suggestion-item .product-meta {
+        font-size: 0.7rem;
+        color: rgba(0, 0, 0, 0.35);
+    }
+
+    .suggestion-item .product-price {
+        font-weight: 700;
+        color: #0F3D2E;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+
+    .no-results {
+        padding: 1rem 1.2rem;
+        color: rgba(0, 0, 0, 0.3);
+        font-size: 0.85rem;
+        text-align: center;
+    }
+
     .text-dark {
         color: rgba(0, 0, 0, 0.85) !important;
         font-weight: 600;
@@ -305,10 +341,7 @@
         text-decoration: underline;
     }
 
-    /* ================================================================
-       BACKGROUND BLUR EFFECT (Premium Smoothness)
-       ================================================================ */
-
+    /* ===== BODY BLUR EFFECT ===== */
     body.search-overlay-active .main-content,
     body.search-overlay-active .navbar,
     body.search-overlay-active .hero-section,
@@ -329,7 +362,7 @@
     }
 
     /* ================================================================
-       RESPONSIVE – Button stays inline, fonts comfortable
+       RESPONSIVE
        ================================================================ */
     @media (max-width: 768px) {
         .search-overlay-content .glass-box-inner {
@@ -353,9 +386,21 @@
             padding: 0.5rem 1.2rem;
             font-size: 0.75rem;
         }
-        .glass-pill {
-            font-size: 0.75rem;
-            padding: 0.3rem 0.8rem;
+        .suggestions-dropdown {
+            max-height: 180px;
+        }
+        .suggestion-item {
+            padding: 0.5rem 1rem;
+        }
+        .suggestion-item .product-img {
+            width: 30px;
+            height: 30px;
+        }
+        .suggestion-item .product-name {
+            font-size: 0.8rem;
+        }
+        .suggestion-item .product-price {
+            font-size: 0.8rem;
         }
     }
 
@@ -373,7 +418,6 @@
         }
         .glass-search-bar {
             border-radius: 40px;
-            /* Keep flex-row, no wrap */
             flex-wrap: nowrap;
         }
         .glass-search-bar input {
@@ -388,10 +432,6 @@
             font-size: 0.75rem;
             margin: 0;
         }
-        .glass-pill {
-            font-size: 0.65rem;
-            padding: 0.25rem 0.7rem;
-        }
         .search-overlay-close {
             top: 10px;
             right: 12px;
@@ -401,7 +441,6 @@
         body.search-overlay-active .navbar {
             filter: blur(4px) brightness(0.7);
         }
-        /* Text colors on mobile */
         .glass-search-bar input {
             color: rgba(0, 0, 0, 0.9) !important;
             font-weight: 500;
@@ -409,6 +448,26 @@
         .text-dark {
             color: rgba(0, 0, 0, 0.9) !important;
             font-weight: 600;
+        }
+        .suggestions-dropdown {
+            max-height: 160px;
+        }
+        .suggestion-item {
+            padding: 0.4rem 0.8rem;
+            gap: 0.6rem;
+        }
+        .suggestion-item .product-img {
+            width: 28px;
+            height: 28px;
+        }
+        .suggestion-item .product-name {
+            font-size: 0.75rem;
+        }
+        .suggestion-item .product-meta {
+            font-size: 0.6rem;
+        }
+        .suggestion-item .product-price {
+            font-size: 0.75rem;
         }
     }
 
@@ -421,26 +480,48 @@
             font-size: 0.65rem;
             padding: 0.4rem 0.7rem;
         }
-        .glass-pill {
-            font-size: 0.55rem;
-            padding: 0.2rem 0.5rem;
+        .suggestions-dropdown {
+            max-height: 140px;
         }
     }
 </style>
 
 <!-- ============================================================ -->
-<!-- ===== JAVASCRIPT – Overlay Logic ===== -->
+<!-- ===== JAVASCRIPT – Overlay + GSAP Staggered Suggestions ===== -->
 <!-- ============================================================ -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
+    // ============================================================
+    // 1. PRODUCT DATA (Matches your Optiq products)
+    // ============================================================
+    const productData = [
+        { id: 1, name: 'Rectangle Black Metal', material: 'Metal · Rectangle', price: 2499, image: 'assets/images/rect-black.jpg' },
+        { id: 2, name: 'Round Silver Frame', material: 'Metal · Round', price: 2999, image: 'assets/images/round-silver.jpg' },
+        { id: 3, name: 'Aviator Gold Frame', material: 'Metal · Aviator', price: 3499, image: 'assets/images/aviator-gold.jpg' },
+        { id: 4, name: 'Wayfarer Black', material: 'Acetate · Wayfarer', price: 1999, image: 'assets/images/wayfarer-black.jpg' },
+        { id: 5, name: 'Rimless Office Frame', material: 'Titanium · Rimless', price: 4999, image: 'assets/images/rimless-office.jpg' },
+        { id: 6, name: 'Blue Light Glasses', material: 'TR90 · Rectangle', price: 2799, image: 'assets/images/blue-light.jpg' },
+        { id: 7, name: 'Classic Round Tortoise', material: 'Acetate · Round', price: 3299, image: 'assets/images/tortoise-round.jpg' },
+        { id: 8, name: 'Slim Metal Navigator', material: 'Metal · Navigator', price: 3899, image: 'assets/images/navigator-metal.jpg' },
+        { id: 9, name: 'Retro Square Crystal', material: 'Acetate · Square', price: 2599, image: 'assets/images/retro-square.jpg' },
+        { id: 10, name: 'Sports Wrap Shield', material: 'TR90 · Shield', price: 4499, image: 'assets/images/sports-shield.jpg' },
+        { id: 11, name: 'Kids Round Frame', material: 'Acetate · Kids', price: 2199, image: 'assets/images/kids-round.jpg' }
+    ];
+
+    // ============================================================
+    // 2. DOM REFS
+    // ============================================================
     const overlay = document.getElementById('searchOverlay');
     const backdrop = document.getElementById('searchOverlayBackdrop');
     const closeBtn = document.getElementById('closeSearchOverlay');
     const searchInput = document.getElementById('overlaySearchInput');
     const searchBtn = document.getElementById('overlaySearchBtn');
+    const suggestionsContainer = document.getElementById('searchSuggestions');
 
-    // ===== SHOW OVERLAY =====
+    // ============================================================
+    // 3. SHOW / HIDE OVERLAY
+    // ============================================================
     window.showSearchOverlay = function() {
         overlay.classList.remove('d-none');
         setTimeout(() => {
@@ -451,9 +532,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (searchInput) searchInput.focus();
         }, 400);
         document.body.style.overflow = 'hidden';
+        suggestionsContainer.innerHTML = '';
+        suggestionsContainer.classList.remove('show');
+        searchInput.value = '';
     };
 
-    // ===== HIDE OVERLAY =====
     window.hideSearchOverlay = function() {
         overlay.classList.remove('show');
         document.body.classList.remove('search-overlay-active');
@@ -461,55 +544,151 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             overlay.classList.add('d-none');
         }, 500);
+        suggestionsContainer.classList.remove('show');
     };
 
-    // ===== EVENT LISTENERS =====
+    // ============================================================
+    // 4. RENDER SUGGESTIONS WITH GSAP STAGGER (EXACTLY LIKE DELIVERY-AREAS)
+    // ============================================================
+    function renderSuggestions(query) {
+        if (!query.trim()) {
+            suggestionsContainer.innerHTML = '';
+            suggestionsContainer.classList.remove('show');
+            return;
+        }
 
-    // Close button
-    if (closeBtn) {
-        closeBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            window.hideSearchOverlay();
+        const q = query.trim().toLowerCase();
+        const matches = productData.filter(p =>
+            p.name.toLowerCase().includes(q) ||
+            p.material.toLowerCase().includes(q)
+        );
+
+        if (matches.length === 0) {
+            suggestionsContainer.innerHTML = `<div class="no-results">No products found for “${query}”</div>`;
+            suggestionsContainer.classList.add('show');
+            // Fade in "no results" with GSAP
+            const noResult = suggestionsContainer.querySelector('.no-results');
+            if (noResult && typeof gsap !== 'undefined') {
+                gsap.from(noResult, { opacity: 0, y: -10, duration: 0.3, ease: 'power2.out' });
+            }
+            return;
+        }
+
+        let html = '';
+        matches.forEach(product => {
+            const imgSrc = product.image || 'assets/images/placeholder.jpg';
+            html += `
+                <div class="suggestion-item" data-id="${product.id}">
+                    <img src="${imgSrc}" alt="${product.name}" class="product-img" loading="lazy">
+                    <div class="product-info">
+                        <span class="product-name">${product.name}</span>
+                        <span class="product-meta">${product.material}</span>
+                    </div>
+                    <span class="product-price">₹${product.price.toLocaleString('en-IN')}</span>
+                </div>
+            `;
+        });
+
+        suggestionsContainer.innerHTML = html;
+        suggestionsContainer.classList.add('show');
+
+        // ─── ✅ GSAP STAGGERED SLIDE-IN (EXACTLY LIKE DELIVERY-AREAS) ───
+        const items = suggestionsContainer.querySelectorAll('.suggestion-item');
+        if (typeof gsap !== 'undefined' && items.length > 0) {
+            // Set initial state
+            gsap.set(items, { opacity: 0, x: -15 });
+            // Animate with stagger
+            gsap.to(items, {
+                opacity: 1,
+                x: 0,
+                duration: 0.4,
+                ease: 'power2.out',
+                stagger: { each: 0.07, from: 'start' }
+            });
+        } else if (items.length > 0) {
+            // Fallback: CSS transitions if GSAP fails
+            items.forEach((item, i) => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0)';
+                item.style.transition = `opacity 0.3s ${i * 0.07}s, transform 0.3s ${i * 0.07}s`;
+            });
+        }
+
+        // ─── CLICK ON SUGGESTION ───
+        items.forEach(item => {
+            item.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const product = productData.find(p => p.id == id);
+                if (product) {
+                    searchInput.value = product.name;
+                    suggestionsContainer.classList.remove('show');
+                    window.location.href = 'search.php?q=' + encodeURIComponent(product.name);
+                }
+            });
         });
     }
 
-    // Backdrop click (closes overlay)
-    if (backdrop) {
-        backdrop.addEventListener('click', function(e) {
-            window.hideSearchOverlay();
-        });
-    }
+    // ============================================================
+    // 5. EVENT LISTENERS
+    // ============================================================
 
-    // Search button
-    if (searchBtn) {
-        searchBtn.addEventListener('click', function(e) {
+    // ─── Input event ───
+    searchInput.addEventListener('input', function() {
+        renderSuggestions(this.value);
+    });
+
+    // ─── Close dropdown on outside click ───
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.search-wrapper')) {
+            suggestionsContainer.classList.remove('show');
+        }
+    });
+
+    // ─── ESC key closes dropdown ───
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            suggestionsContainer.classList.remove('show');
+            this.blur();
+        }
+    });
+
+    // ─── Close button ───
+    closeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.hideSearchOverlay();
+    });
+
+    // ─── Backdrop click ───
+    backdrop.addEventListener('click', function() {
+        window.hideSearchOverlay();
+    });
+
+    // ─── Search button ───
+    searchBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const query = searchInput.value.trim();
+        if (query.length > 0) {
+            window.location.href = 'search.php?q=' + encodeURIComponent(query);
+        } else {
+            window.hideSearchOverlay();
+        }
+    });
+
+    // ─── Enter key ───
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
             e.preventDefault();
-            const query = searchInput ? searchInput.value.trim() : '';
+            const query = this.value.trim();
             if (query.length > 0) {
                 window.location.href = 'search.php?q=' + encodeURIComponent(query);
             } else {
                 window.hideSearchOverlay();
             }
-        });
-    }
+        }
+    });
 
-    // Enter key
-    if (searchInput) {
-        searchInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const query = this.value.trim();
-                if (query.length > 0) {
-                    window.location.href = 'search.php?q=' + encodeURIComponent(query);
-                } else {
-                    window.hideSearchOverlay();
-                }
-            }
-        });
-    }
-
-    // ESC key
+    // ─── Global ESC key ───
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             if (overlay && overlay.classList.contains('show')) {
@@ -518,6 +697,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    console.log('✅ Search Overlay – Transparent Background + Blur Loaded!');
+    // ============================================================
+    // 6. NAVBAR BADGE SYNC
+    // ============================================================
+    const cartBadge = document.querySelector('.cart-badge');
+    if (cartBadge) {
+        const count = parseInt(localStorage.getItem('optiq_cartCount')) || 0;
+        cartBadge.textContent = count;
+    }
+    const wishlistBadge = document.querySelector('.wishlist-badge');
+    if (wishlistBadge) {
+        const count = parseInt(localStorage.getItem('optiq_wishlistCount')) || 0;
+        wishlistBadge.textContent = count;
+        wishlistBadge.style.display = count > 0 ? 'flex' : 'none';
+    }
+
+    console.log('✅ Search Overlay with GSAP Staggered Suggestions Loaded!');
 });
 </script>

@@ -72,7 +72,7 @@
             </ul>
         </div>
 
-        <!-- ===== RIGHT: Icons + Mobile Search + Hamburger ===== -->
+        <!-- ===== RIGHT: Icons + Mobile Search + Profile + Hamburger ===== -->
         <div class="d-flex align-items-center gap-2 ms-auto" style="flex: 0 0 auto; z-index: 2;">
             <!-- Search – desktop -->
             <a href="#" class="nav-icon d-none d-lg-inline-flex" id="openSearchOverlay">
@@ -103,8 +103,17 @@
                 <span class="cart-badge">0</span>
             </a>
 
-            <!-- Profile – desktop -->
-            <div class="dropdown-custom d-none d-lg-inline-block" id="profileDropdownCustom">
+            <!-- ===== MOBILE SEARCH ===== -->
+            <a href="#" class="nav-icon d-lg-none" id="openSearchOverlayMobile">
+                <svg class="tab-icon search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="search-ring" cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/>
+                    <path class="search-handle" d="M16 16L21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    <circle class="search-lens" cx="11" cy="11" r="3" fill="currentColor" fill-opacity="0.12" stroke="none"/>
+                </svg>
+            </a>
+
+            <!-- ===== PROFILE (Visible on all - mobile & desktop) ===== -->
+            <div class="dropdown-custom d-inline-block" id="profileDropdownCustom">
                 <a href="#" class="nav-icon position-relative" id="profileToggle">
                     <svg class="tab-icon profile-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle class="profile-head" cx="12" cy="8" r="5" stroke="currentColor" stroke-width="1.8"/>
@@ -119,15 +128,6 @@
                     <li><a class="dropdown-item" href="#" id="logoutLink"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                 </ul>
             </div>
-
-            <!-- ===== MOBILE SEARCH ===== -->
-            <a href="#" class="nav-icon d-lg-none" id="openSearchOverlayMobile">
-                <svg class="tab-icon search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle class="search-ring" cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/>
-                    <path class="search-handle" d="M16 16L21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                    <circle class="search-lens" cx="11" cy="11" r="3" fill="currentColor" fill-opacity="0.12" stroke="none"/>
-                </svg>
-            </a>
 
             <!-- ===== HAMBURGER ===== -->
             <button class="navbar-toggler border-0 hamburger-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
@@ -210,15 +210,7 @@
                         <span class="nav-label fs-5">Cart</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex flex-column align-items-center gap-2" href="profile.php" data-tab="profile">
-                        <svg class="tab-icon profile-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle class="profile-head" cx="12" cy="8" r="5" stroke="currentColor" stroke-width="1.8"/>
-                            <path class="profile-body" d="M4 22c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                        </svg>
-                        <span class="nav-label fs-5">Profile</span>
-                    </a>
-                </li>
+                <!-- Profile link REMOVED from overlay as requested -->
             </ul>
         </div>
     </div>
@@ -530,9 +522,9 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(247, 245, 240, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(247, 245, 240, 0.20);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             padding: 80px 2rem 2rem;
             overflow-y: auto;
             display: flex !important;

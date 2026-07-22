@@ -50,24 +50,19 @@ include 'templates/navbar.php';
 </section>
 
 <!-- ============================================================ -->
-<!-- FILTER STRIP – Morphing Funnel Icon (Same as Search Page)    -->
+<!-- FILTER STRIP – Funnel Icon with Animation                    -->
 <!-- ============================================================ -->
-<section id="categoryFilterStrip" class="bg-cream py-3 border-top border-bottom sticky-top" style="top: 76px; z-index: 1020; backdrop-filter: blur(12px); background: rgba(247, 245, 240, 0.9);">
+<section id="categoryFilterStrip" class="bg-cream py-3 border-top border-bottom sticky-top" style="top: 76px; z-index: 1020; background: #f7f5f0;">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center gap-2 w-100">
 
-            <!-- Morphing Funnel Icon -->
+            <!-- Funnel Icon Only (No Hamburger Lines) -->
             <div class="filter-trigger-wrapper d-flex align-items-center gap-3" onclick="toggleDrawer()" style="cursor: pointer;">
                 <div class="filter-icon" id="filterIcon">
-                    <div class="line-group">
-                        <span class="line l1"></span>
-                        <span class="line l2"></span>
-                        <span class="line l3"></span>
-                    </div>
+                    <!-- Only Funnel SVG – NO LINES -->
                     <div class="funnel-shape">
-                        <svg viewBox="0 0 20 20" width="20" height="20">
-                            <polygon points="0,5 14,5 20,10 14,15 0,15" class="funnel-body" />
-                            <rect x="0" y="12" width="5" height="3" class="funnel-stem" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"/>
                         </svg>
                     </div>
                 </div>
@@ -96,7 +91,7 @@ include 'templates/navbar.php';
 <!-- ============================================================ -->
 <section class="py-5">
     <div class="container">
-        <div id="categoryProductGrid" class="row g-5">
+        <div id="categoryProductGrid" class="row g-4">
             <?php
             $products = [
                 // Men
@@ -153,10 +148,9 @@ include 'templates/navbar.php';
                     data-weight="<?= $prod['weight']; ?>"
                     data-category="<?= $prod['category']; ?>"
                     style="display: block;">
-                    <div class="card h-100 border-0 shadow-none">
+                    <div class="card h-100 border-0 shadow-sm">
                         <div class="position-relative">
-                            <img src="assets/images/<?= $prod['img']; ?>" class="card-img-top" alt="<?= $prod['name']; ?>" style="height: 200px; width: 100%; object-fit: contain;background: #ffffff; padding: 4px;">
-                            <!-- YOUR ORIGINAL "NEW" BADGE – KEPT EXACTLY AS YOU WANT -->
+                            <img src="assets/images/<?= $prod['img']; ?>" class="card-img-top" alt="<?= $prod['name']; ?>" style="height: 200px; width: 100%; object-fit: contain; background: #f8f9fa; padding: 12px;">
                             <span class="badge bg-gold text-navy position-absolute top-0 start-0 m-2">NEW</span>
                             <button class="btn p-0 position-absolute top-0 end-0 m-2 wishlist-product-btn"
                                 data-id="<?= pathinfo($prod['img'], PATHINFO_FILENAME); ?>"
@@ -235,16 +229,11 @@ include 'templates/navbar.php';
                 foreach ($related as $rel):
                 ?>
                     <div class="related-card bg-white rounded-4 border flex-shrink-0 position-relative living-card">
-                        <!-- Shutter Panels -->
                         <div class="shutter-panel shutter-top"></div>
                         <div class="shutter-panel shutter-bottom"></div>
-
-                        <!-- Image -->
                         <div class="card-img-wrapper">
                             <img src="assets/images/<?= $rel['img']; ?>" class="card-img w-100" alt="<?= $rel['name']; ?>">
                         </div>
-
-                        <!-- Wishlist Heart (Always visible) -->
                         <button class="btn p-0 position-absolute top-0 end-0 m-2 related-wishlist-btn"
                             data-id="<?= pathinfo($rel['img'], PATHINFO_FILENAME); ?>"
                             data-name="<?= $rel['name']; ?>"
@@ -255,8 +244,6 @@ include 'templates/navbar.php';
                             style="background: none; border: none; z-index: 5; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));">
                             <i class="bi bi-heart fs-4 text-dark" style="text-shadow: 0 0 10px rgba(0,0,0,0.3);"></i>
                         </button>
-
-                        <!-- Card Details (Hidden initially, slides up on hover) -->
                         <div class="card-details">
                             <div class="card-details-inner">
                                 <p class="fw-bold small text-navy mb-0"><?= $rel['name']; ?></p>
@@ -266,8 +253,6 @@ include 'templates/navbar.php';
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Card Actions (Hidden initially, slides up on hover with stagger) -->
                         <div class="card-actions">
                             <div class="card-actions-inner d-flex justify-content-center gap-3">
                                 <button class="action-icon add-to-bag-btn"
@@ -528,112 +513,104 @@ include 'templates/navbar.php';
     }
 
     /* ============================================================
-       FUNNEL MORPHING ICON
+       FUNNEL ICON – NO HAMBURGER LINES (Only SVG)
        ============================================================ */
     .filter-icon {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 4px;
         width: 44px;
         height: 44px;
         border-radius: 50%;
         background: rgba(15, 61, 46, 0.04);
-        transition: background 0.2s;
-        padding: 0 6px;
+        transition: background 0.2s, transform 0.3s ease;
+        padding: 0;
         cursor: pointer;
         position: relative;
+        color: #0F3D2E;
     }
 
     .filter-icon:hover {
         background: rgba(15, 61, 46, 0.08);
+        transform: scale(1.05);
     }
 
-    .line-group {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 3px;
-        width: 16px;
-        transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .line-group .line {
-        display: block;
-        height: 2.5px;
-        background: #0F3D2E;
-        border-radius: 4px;
-        transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-        transform-origin: left center;
-        width: 100%;
-    }
-
-    .line-group .l1 {
-        width: 14px;
-    }
-
-    .line-group .l2 {
-        width: 18px;
-    }
-
-    .line-group .l3 {
-        width: 14px;
-    }
-
+    /* ─── Funnel shape – Bootstrap SVG ─── */
     .funnel-shape {
-        width: 20px;
-        height: 20px;
-        transform: scale(0);
-        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s;
-        opacity: 0;
-        margin-left: -4px;
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                    color 0.3s ease;
+        color: #0F3D2E;
     }
 
     .funnel-shape svg {
         display: block;
         width: 100%;
         height: 100%;
+        fill: currentColor;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .funnel-body {
-        fill: none;
-        stroke: #0F3D2E;
-        stroke-width: 2;
-        stroke-linejoin: round;
-    }
-
-    .funnel-stem {
-        fill: #0F3D2E;
-        rx: 1;
-    }
-
-    .filter-icon.active .line-group {
-        width: 0;
-        overflow: hidden;
-        opacity: 0;
+    /* ─── Active state (drawer open) ─── */
+    .filter-icon.active {
+        background: rgba(212, 175, 55, 0.12);
+        color: #D4AF37;
+        animation: filterPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .filter-icon.active .funnel-shape {
-        transform: scale(1);
-        opacity: 1;
-        animation: funnelBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        color: #D4AF37;
+        animation: funnelSpin 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    @keyframes funnelBounce {
+    .filter-icon.active .funnel-shape svg {
+        transform: rotate(180deg) scale(1.1);
+    }
+
+    /* ─── Keyframe Animations ─── */
+    @keyframes filterPop {
         0% {
-            transform: scale(0.2) rotate(-10deg);
+            transform: scale(0.8);
+            opacity: 0.6;
+        }
+        50% {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes funnelSpin {
+        0% {
+            transform: rotate(0deg) scale(0.6);
             opacity: 0.5;
         }
-
-        60% {
-            transform: scale(1.15) rotate(3deg);
+        50% {
+            transform: rotate(200deg) scale(1.2);
             opacity: 1;
         }
-
         100% {
-            transform: scale(1) rotate(0deg);
+            transform: rotate(180deg) scale(1);
             opacity: 1;
         }
+    }
+
+    /* ─── Hover effect on active state ─── */
+    .filter-icon.active:hover {
+        background: rgba(212, 175, 55, 0.18);
+        transform: scale(1.08);
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+    }
+
+    .filter-icon.active:hover .funnel-shape svg {
+        transform: rotate(200deg) scale(1.15);
     }
 
     /* ============================================================
@@ -856,7 +833,6 @@ include 'templates/navbar.php';
         border: 3px solid #fff;
     }
 
-
     /* ----- FIX BUTTON SIZES ----- */
     .product-card .btn {
         border-radius: 30px !important;
@@ -870,7 +846,6 @@ include 'templates/navbar.php';
         margin-right: 4px !important;
     }
 
-    /* Make Add to Cart button full emerald */
     .product-card .add-to-bag-btn {
         background: #0F3D2E !important;
         color: #fff !important;
@@ -883,7 +858,6 @@ include 'templates/navbar.php';
         box-shadow: 0 6px 20px rgba(15, 61, 46, 0.25);
     }
 
-    /* Order button outline */
     .product-card .order-btn {
         border: 2px solid #0F3D2E !important;
         color: #0F3D2E !important;
@@ -902,7 +876,7 @@ include 'templates/navbar.php';
        ============================================================ */
     .related-card {
         width: 220px !important;
-        min-height: auto !important;   /* ← FIXED: Removes extra gap */
+        min-height: auto !important;
         padding: 0 !important;
         border-radius: 16px !important;
         overflow: hidden;
@@ -920,8 +894,8 @@ include 'templates/navbar.php';
     .card-img-wrapper {
         position: relative;
         width: 100%;
-        height: auto !important;      /* ← FIXED: Removes fixed height */
-        aspect-ratio: 1 / 1;          /* ← Makes image square */
+        height: auto !important;
+        aspect-ratio: 1 / 1;
         overflow: hidden;
         background: #f8f9fa;
     }
@@ -935,7 +909,6 @@ include 'templates/navbar.php';
         will-change: transform;
     }
 
-    /* Shutter Panels */
     .shutter-panel {
         position: absolute;
         left: 0;
@@ -959,7 +932,6 @@ include 'templates/navbar.php';
         transform-origin: bottom center;
     }
 
-    /* Card Details */
     .card-details {
         height: 0;
         overflow: hidden;
@@ -980,7 +952,6 @@ include 'templates/navbar.php';
         font-size: 0.85rem !important;
     }
 
-    /* Card Actions */
     .card-actions {
         height: 0;
         overflow: hidden;
@@ -1017,31 +988,25 @@ include 'templates/navbar.php';
         transform: translateY(-2px) scale(1.1);
     }
 
-    /* Mobile: Always show details + actions */
     @media (hover: none) and (pointer: coarse) {
         .shutter-panel {
             display: none !important;
         }
-
         .card-details {
             height: auto !important;
             padding: 8px 14px !important;
         }
-
         .card-actions {
             height: auto !important;
             padding: 0 14px 12px 14px !important;
         }
-
         .action-icon {
             opacity: 1 !important;
             transform: translateY(0) !important;
         }
-
         .related-card {
             min-height: auto !important;
         }
-
         .card-img-wrapper {
             height: auto !important;
             aspect-ratio: 1 / 1 !important;
@@ -1130,18 +1095,15 @@ include 'templates/navbar.php';
         margin-left: 4px;
     }
 
-    /* ----- SHUTTER FLASH ANIMATION ----- */
     @keyframes shutterFlash {
         0% {
             transform: scale(0.2);
             opacity: 1;
         }
-
         50% {
             transform: scale(1.5);
             opacity: 0.8;
         }
-
         100% {
             transform: scale(1);
             opacity: 0;
@@ -1157,55 +1119,31 @@ include 'templates/navbar.php';
             font-size: 0.75rem;
             border-width: 1px;
         }
-
         .scroll-arrow {
             width: 32px;
             height: 32px;
             font-size: 1rem;
         }
-
         .related-prev {
             left: -5px;
         }
-
         .related-next {
             right: -5px;
         }
-
         .related-card {
             width: 170px !important;
             min-height: auto !important;
         }
-
         .card-img-wrapper {
             aspect-ratio: 1 / 1 !important;
         }
-
         .filter-drawer {
             padding: 20px 16px;
         }
-
         .filter-icon {
             width: 38px;
             height: 38px;
         }
-
-        .line-group {
-            width: 14px;
-        }
-
-        .line-group .l1 {
-            width: 12px;
-        }
-
-        .line-group .l2 {
-            width: 16px;
-        }
-
-        .line-group .l3 {
-            width: 12px;
-        }
-
         .funnel-shape {
             width: 18px;
             height: 18px;
@@ -1218,69 +1156,39 @@ include 'templates/navbar.php';
             font-size: 0.65rem;
             border-radius: 30px;
         }
-
         .filter-drawer {
             width: 100vw;
             max-width: 100vw;
             border-radius: 0;
         }
-
         .step-circle {
             width: 36px;
             height: 36px;
             font-size: 0.8rem;
         }
-
         .filter-icon {
             width: 34px;
             height: 34px;
         }
-
-        .line-group {
-            width: 12px;
-            gap: 2px;
-        }
-
-        .line-group .line {
-            height: 2px;
-        }
-
-        .line-group .l1 {
-            width: 10px;
-        }
-
-        .line-group .l2 {
-            width: 14px;
-        }
-
-        .line-group .l3 {
-            width: 10px;
-        }
-
         .funnel-shape {
             width: 16px;
             height: 16px;
         }
-
         .product-card .card-img-top {
             height: 160px !important;
             padding: 8px !important;
         }
-
         .product-card .btn {
             font-size: 0.7rem !important;
             padding: 4px 8px !important;
         }
-
         .product-card .product-name {
             font-size: 0.8rem !important;
         }
-
         .related-card {
             width: 150px !important;
             min-height: auto !important;
         }
-
         .card-img-wrapper {
             aspect-ratio: 1 / 1 !important;
         }
@@ -1427,6 +1335,64 @@ include 'templates/navbar.php';
 
         overlay.addEventListener('click', closeDrawer);
         closeBtn.addEventListener('click', closeDrawer);
+
+        // ─── Funnel Icon GSAP Animation ──────────────────────────
+        const funnelShape = document.querySelector('.funnel-shape');
+        const funnelSvg = funnelShape ? funnelShape.querySelector('svg') : null;
+
+        // Watch for .active class changes on filterIcon
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    const isActive = filterIcon.classList.contains('active');
+                    if (isActive) {
+                        // Funnel bounce animation
+                        gsap.to(funnelShape, {
+                            scale: 1.2,
+                            rotation: 10,
+                            duration: 0.4,
+                            ease: 'back.out(1.7)',
+                            yoyo: true,
+                            repeat: 1,
+                            onComplete: function() {
+                                gsap.to(funnelShape, {
+                                    scale: 1,
+                                    rotation: 0,
+                                    duration: 0.3,
+                                    ease: 'power2.out'
+                                });
+                            }
+                        });
+                        // SVG spin
+                        if (funnelSvg) {
+                            gsap.to(funnelSvg, {
+                                rotation: 180,
+                                scale: 1.1,
+                                duration: 0.5,
+                                ease: 'back.out(1.7)'
+                            });
+                        }
+                    } else {
+                        // Reset when closing
+                        if (funnelSvg) {
+                            gsap.to(funnelSvg, {
+                                rotation: 0,
+                                scale: 1,
+                                duration: 0.3,
+                                ease: 'power2.in'
+                            });
+                        }
+                        gsap.to(funnelShape, {
+                            scale: 1,
+                            rotation: 0,
+                            duration: 0.3,
+                            ease: 'power2.in'
+                        });
+                    }
+                }
+            });
+        });
+        observer.observe(filterIcon, { attributes: true });
 
         // ============================================================
         // 6. STEPPER LOGIC
@@ -1659,11 +1625,9 @@ include 'templates/navbar.php';
         // ============================================================
         // 12. WISHLIST COUNT FIX – Related Section
         // ============================================================
-        // Get the global wishlist badge
         const wishlistBadge = document.querySelector('.wishlist-badge');
         let wishlistCount = parseInt(localStorage.getItem('optiq_wishlistCount')) || 0;
 
-        // Function to update badge
         function updateWishlistBadgeCount(count) {
             if (wishlistBadge) {
                 wishlistBadge.textContent = count;
@@ -1672,14 +1636,12 @@ include 'templates/navbar.php';
             }
         }
 
-        // Click handler for related wishlist buttons
         document.querySelectorAll('.related-wishlist-btn, .related-wishlist-btn-global').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 const icon = this.querySelector('i');
                 if (!icon) return;
 
-                // Shutter flash effect
                 const card = this.closest('.related-card');
                 if (card) {
                     const shutter = document.createElement('div');
@@ -1697,14 +1659,12 @@ include 'templates/navbar.php';
                     setTimeout(() => shutter.remove(), 700);
                 }
 
-                // Instagram pop
                 this.style.transition = 'transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1)';
                 this.style.transform = 'scale(2)';
                 setTimeout(() => {
                     this.style.transform = 'scale(1)';
                 }, 200);
 
-                // Toggle heart and update count
                 if (icon.classList.contains('bi-heart')) {
                     icon.classList.remove('bi-heart');
                     icon.classList.add('bi-heart-fill');
@@ -1747,7 +1707,53 @@ include 'templates/navbar.php';
             });
         });
 
-        console.log('✅ Category Page Loaded – Shutter Animation + Wishlist Count Fixed!');
+        // ============================================================
+        // 14. HANDLE SHAPE FILTER FROM URL (quick-actions.php)
+        // ============================================================
+        const urlParams = new URLSearchParams(window.location.search);
+        const shapeFilter = urlParams.get('shape');
+
+        if (shapeFilter) {
+            // Try to find matching category pill first
+            const shapePill = document.querySelector(`.category-pill[data-category="${shapeFilter}"]`);
+            if (shapePill) {
+                // Click the pill to apply filter
+                shapePill.click();
+            } else {
+                // If no matching pill, filter by shape data attribute
+                // Deactivate all pills
+                const shapePills = document.querySelectorAll('.category-pill');
+                shapePills.forEach(p => p.classList.remove('active'));
+                
+                // Filter products
+                productCards.forEach(card => {
+                    const cardShape = card.dataset.shape;
+                    if (cardShape === shapeFilter) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Deactivate quick chips
+                const filterChips = document.querySelectorAll('.filter-chip');
+                filterChips.forEach(chip => chip.classList.remove('active'));
+                
+                // Add active filter tag
+                const activeFiltersContainer = document.getElementById('activeFiltersCategory');
+                if (activeFiltersContainer) {
+                    // Clear existing tags
+                    activeFiltersContainer.innerHTML = '';
+                    const tag = document.createElement('span');
+                    tag.className = 'badge bg-accent text-primary me-1 mb-1';
+                    const shapeName = shapeFilter.charAt(0).toUpperCase() + shapeFilter.slice(1);
+                    tag.innerHTML = `Shape: ${shapeName} <button class="btn-close ms-1" style="font-size:0.5rem;" onclick="this.parentElement.remove(); document.querySelectorAll('.product-card').forEach(c => c.style.display = ''); document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));"></button>`;
+                    activeFiltersContainer.appendChild(tag);
+                }
+            }
+        }
+
+        console.log('✅ Category Page Loaded – Shutter Animation + Funnel Icon (No Hamburger Lines)!');
     });
 </script>
 <?php include 'search-overlay.php'; ?>

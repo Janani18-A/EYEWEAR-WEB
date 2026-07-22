@@ -1,5 +1,5 @@
 <?php
-// track-order.php – Dual Mode: Single Order OR List + Expandable (BOOTSTRAP RESPONSIVE)
+// track-order.php – Dual Mode: Single Order OR List + Expandable (BOOTSTRAP RESPONSIVE) – FIXED
 include 'templates/header.php';
 include 'templates/navbar.php';
 ?>
@@ -28,9 +28,9 @@ include 'templates/navbar.php';
 <section class="bg-cream py-4 py-md-5 track-section" style="min-height:100vh;padding-top:clamp(80px,12vh,100px) !important;">
     <div class="container">
 
-        <!-- ─── BACK BUTTON ─── -->
-        <div class="mb-4">
-            <a href="orders.php" class="btn btn-outline-emerald btn-sm rounded-pill px-3 px-sm-4" style="font-size:clamp(0.7rem,1vw,0.85rem);padding:0.3rem 0.8rem;">
+        <!-- ─── BACK BUTTON ─── (FIXED: reduced margin & padding) -->
+        <div class="mb-4 mb-sm-3 mb-md-2">
+            <a href="orders.php" class="btn btn-outline-emerald btn-sm rounded-pill px-3 px-sm-4" style="font-size:clamp(0.6rem,0.5vw,0.8rem);padding:0.2rem 0.3rem;">
                 <i class="bi bi-arrow-left me-2"></i> Back to Orders
             </a>
         </div>
@@ -186,16 +186,17 @@ include 'templates/navbar.php';
         <!-- MODE 2: LIST ALL ORDERS (when no ?id)                     -->
         <!-- ========================================================== -->
         <div id="listMode">
-            <!-- ─── SEARCH BAR ─── -->
+            <!-- ─── SEARCH BAR (FIXED: col-md-5) ─── -->
             <div class="row g-2 g-sm-3 mb-4" id="trackSearchSection">
-                <div class="col-md-6">
+                <div class="col-md-5 col-12">
                     <div class="position-relative">
                         <i class="bi bi-search position-absolute" style="top:12px;left:14px;color:rgba(0,0,0,0.2);"></i>
                         <input type="text" class="form-control rounded-pill ps-5" id="trackSearchInput" placeholder="🔍 Search by Order ID or Product Name..." style="border-color:rgba(0,0,0,0.04);background:rgba(255,255,255,0.4);backdrop-filter:blur(8px);font-size:clamp(0.8rem,1vw,0.9rem);padding:0.4rem 0.8rem;">
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="d-flex flex-wrap gap-1 gap-sm-2" id="trackFilterChips">
+                <!-- ─── FILTER CHIPS (FIXED: col-md-7 + alignment) ─── -->
+                <div class="col-md-7 col-12">
+                    <div class="d-flex flex-wrap align-items-center justify-content-start gap-1 gap-sm-2" id="trackFilterChips">
                         <button class="filter-chip active" data-filter="all" style="font-size:clamp(0.6rem,0.9vw,0.75rem);padding:0.25rem 0.8rem;">All</button>
                         <button class="filter-chip" data-filter="Processing" style="font-size:clamp(0.6rem,0.9vw,0.75rem);padding:0.25rem 0.8rem;">🔵 Processing</button>
                         <button class="filter-chip" data-filter="Shipped" style="font-size:clamp(0.6rem,0.9vw,0.75rem);padding:0.25rem 0.8rem;">🟠 Shipped</button>
@@ -595,14 +596,13 @@ document.addEventListener('DOMContentLoaded', function() {
             html += `
                 <div class="order-card glass-card p-3 p-md-4 rounded-4 mb-4" data-order-id="${order.id}">
                     <div class="order-card-inner">
-                        <div class="d-flex flex-wrap align-items-start justify-content-between mb-3">
-                            <div>
-                                <div class="d-flex align-items-center gap-2 flex-wrap">
-                                    <span class="fw-bold text-primary" style="font-size:clamp(0.85rem,1.2vw,1rem);">#${order.id || 'N/A'}</span>
-                                    <span class="text-muted-custom small" style="font-size:clamp(0.6rem,0.8vw,0.7rem);">${order.date ? new Date(order.date).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : 'N/A'}</span>
-                                </div>
+                        <!-- ===== FIXED HEADER: flex-nowrap, text-truncate ===== -->
+                        <div class="d-flex align-items-center justify-content-between mb-3" style="flex-wrap: nowrap; gap: 0.5rem;">
+                            <div class="d-flex align-items-center gap-1" style="flex: 1; min-width: 0; overflow: hidden;">
+                                <span class="fw-bold text-primary text-truncate" style="font-size:clamp(0.75rem,1.2vw,0.95rem); white-space: nowrap;">#${order.id || 'N/A'}</span>
+                                <span class="text-muted-custom small" style="font-size:clamp(0.5rem,0.8vw,0.65rem); white-space: nowrap;">${order.date ? new Date(order.date).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : 'N/A'}</span>
                             </div>
-                            <div>${getStatusBadge(order.status || 'Processing')}</div>
+                            <div style="flex-shrink: 0; white-space: nowrap;">${getStatusBadge(order.status || 'Processing')}</div>
                         </div>
 
                         <div class="d-flex flex-wrap align-items-center gap-3 mb-2">

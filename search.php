@@ -1,5 +1,5 @@
 <?php
-// search.php – Optiq Smart Search Page (Funnel Morphing Icon)
+// search.php – Optiq Smart Search Page (Only Funnel Icon – Rotates on Hover/Click)
 include 'templates/header.php';
 include 'templates/navbar.php';
 ?>
@@ -70,26 +70,18 @@ include 'templates/navbar.php';
 </section>
 
 <!-- ============================================================ -->
-<!-- 3. FILTER STRIP – New Funnel Icon + Quick Chips + Clear All -->
+<!-- 3. FILTER STRIP – ONLY FUNNEL ICON (ROTATES ON HOVER/CLICK) -->
 <!-- ============================================================ -->
 <section id="searchResults" class="bg-cream py-2 border-top border-bottom sticky-top search-filter-bar" style="top: 76px; z-index: 1020; backdrop-filter: blur(12px); background: rgba(247, 245, 240, 0.9);">
     <div class="container px-2 px-sm-3">
         <div class="d-flex flex-wrap align-items-center gap-1 gap-sm-2 w-100">
             
-            <!-- 🔥 NEW: Funnel Morphing Icon -->
+            <!-- 🔥 ONLY FUNNEL SVG – NO HAMBURGER LINES -->
             <div class="filter-trigger-wrapper d-flex align-items-center gap-1 gap-sm-3" onclick="toggleDrawer()" style="cursor: pointer;">
-                <div class="filter-icon" id="filterIcon" style="width: clamp(30px, 5vw, 40px); height: clamp(30px, 5vw, 40px); border-radius: 50%; background: rgba(15, 61, 46, 0.04); display: flex; align-items: center; justify-content: center; gap: 2px; padding: 0 3px; transition: background 0.2s; position: relative;">
-                    <!-- Three lines (left side) -->
-                    <div class="line-group" style="display: flex; flex-direction: column; align-items: center; gap: clamp(1.5px, 0.3vw, 2.5px); width: clamp(10px, 2vw, 14px); transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);">
-                        <span class="line l1" style="display: block; height: 2px; background: #0F3D2E; border-radius: 4px; transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: left center; width: clamp(8px, 1.5vw, 12px);"></span>
-                        <span class="line l2" style="display: block; height: 2px; background: #0F3D2E; border-radius: 4px; transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: left center; width: clamp(10px, 2vw, 16px);"></span>
-                        <span class="line l3" style="display: block; height: 2px; background: #0F3D2E; border-radius: 4px; transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: left center; width: clamp(8px, 1.5vw, 12px);"></span>
-                    </div>
-                    <!-- Funnel shape (right side) -->
-                    <div class="funnel-shape" style="width: clamp(12px, 2.5vw, 18px); height: clamp(12px, 2.5vw, 18px); transform: scale(0); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s; opacity: 0; margin-left: -2px;">
-                        <svg viewBox="0 0 20 20" width="100%" height="100%">
-                            <polygon points="0,5 14,5 20,10 14,15 0,15" class="funnel-body" style="fill: none; stroke: #0F3D2E; stroke-width: 2; stroke-linejoin: round;" />
-                            <rect x="0" y="12" width="5" height="3" class="funnel-stem" style="fill: #0F3D2E; rx: 1;" />
+                <div class="filter-icon" id="filterIcon" style="width: clamp(34px, 5vw, 42px); height: clamp(34px, 5vw, 42px); border-radius: 50%; background: rgba(15, 61, 46, 0.04); display: flex; align-items: center; justify-content: center; transition: background 0.2s, transform 0.3s ease; position: relative;">
+                    <div class="funnel-shape" style="width: clamp(18px, 3.5vw, 26px); height: clamp(18px, 3.5vw, 26px); display: flex; align-items: center; justify-content: center; color: #0F3D2E; transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"/>
                         </svg>
                     </div>
                 </div>
@@ -374,7 +366,7 @@ include 'templates/navbar.php';
 </div>
 
 <!-- ============================================================ -->
-<!-- STYLES – Complete with Funnel Morphing Icon                  -->
+<!-- STYLES – Complete with Only Funnel Rotation                  -->
 <!-- ============================================================ -->
 <style>
     /* ---------- 1. HERO SECTION ---------- */
@@ -721,6 +713,25 @@ include 'templates/navbar.php';
     }
 
     /* ================================================================
+       🔥 ONLY FUNNEL ICON – ROTATE ON HOVER & ACTIVE
+       ================================================================ */
+    /* Hover: rotate 15deg */
+    .filter-icon:hover .funnel-shape {
+        transform: rotate(15deg);
+    }
+    
+    /* Active (drawer open): rotate 45deg for morph effect */
+    .filter-icon.active .funnel-shape {
+        transform: rotate(45deg);
+    }
+
+    /* Hover effect on icon */
+    .filter-icon:hover {
+        background: rgba(15, 61, 46, 0.08) !important;
+        transform: scale(1.05);
+    }
+
+    /* ================================================================
        RESPONSIVE – ALL DEVICES
        ================================================================ */
 
@@ -770,15 +781,9 @@ include 'templates/navbar.php';
             width: clamp(28px, 5vw, 34px) !important;
             height: clamp(28px, 5vw, 34px) !important;
         }
-        .line-group {
-            width: clamp(8px, 2vw, 12px) !important;
-        }
-        .line-group .l1 { width: clamp(7px, 1.5vw, 10px) !important; }
-        .line-group .l2 { width: clamp(9px, 2vw, 14px) !important; }
-        .line-group .l3 { width: clamp(7px, 1.5vw, 10px) !important; }
         .funnel-shape {
-            width: clamp(10px, 2vw, 14px) !important;
-            height: clamp(10px, 2vw, 14px) !important;
+            width: clamp(14px, 2.5vw, 18px) !important;
+            height: clamp(14px, 2.5vw, 18px) !important;
         }
         .step-circle {
             width: clamp(24px, 5vw, 30px) !important;
@@ -794,6 +799,13 @@ include 'templates/navbar.php';
         }
         .organic-stepper-container {
             padding: clamp(6px, 1vw, 10px) clamp(4px, 0.8vw, 8px) !important;
+        }
+        /* Mobile rotation adjustments */
+        .filter-icon:hover .funnel-shape {
+            transform: rotate(12deg);
+        }
+        .filter-icon.active .funnel-shape {
+            transform: rotate(30deg);
         }
     }
 
@@ -845,6 +857,12 @@ include 'templates/navbar.php';
         .filter-option-btn {
             padding: clamp(2px, 0.6vw, 4px) clamp(4px, 1vw, 8px) !important;
             font-size: clamp(0.4rem, 0.7vw, 0.5rem) !important;
+        }
+        .filter-icon:hover .funnel-shape {
+            transform: rotate(10deg);
+        }
+        .filter-icon.active .funnel-shape {
+            transform: rotate(25deg);
         }
     }
 </style>
@@ -967,14 +985,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ================================================================
-    // 🚀 6. DRAWER + FUNNEL ICON TOGGLE + ORGANIC STEPPER
+    // 🚀 6. DRAWER + FUNNEL ICON ROTATION + ORGANIC STEPPER
     // ================================================================
     const filterIcon = document.getElementById('filterIcon');
     const drawer = document.getElementById('filterDrawer');
     const overlay = document.getElementById('filterOverlay');
     const closeBtn = document.getElementById('closeDrawerBtn');
 
-    // Toggle function
+    // Toggle function with animated icon
     window.toggleDrawer = function() {
         const isOpen = drawer.classList.contains('open');
         if (isOpen) {
@@ -1097,7 +1115,7 @@ document.addEventListener('DOMContentLoaded', function() {
         closeDrawer();
     });
 
-    console.log('✅ Optiq Search Page – Funnel Morphing Icon + SVG Stepper Active!');
+    console.log('✅ Optiq Search Page – Only Funnel Icon (Rotates on Hover/Click) Active!');
 });
 </script>
 

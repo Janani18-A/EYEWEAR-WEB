@@ -1,4 +1,4 @@
-<!-- quick-actions.php -->
+<!-- quick-actions.php – Find Your Perfect Shape (With Category Links) -->
 <section class="bg-primary py-5">
     <div class="container py-4">
         <div class="text-center mb-5 reveal">
@@ -9,20 +9,21 @@
         <div class="row g-4 justify-content-center">
             <?php
             $shapes = [
-                ['Round', 'bi-circle', 'round-shape.png'],
-                ['Square', 'bi-square', 'square-shape.png'],
-                ['Aviator', 'bi-sunglasses', 'aviator-shape.png'],
-                ['Cat-Eye', 'bi-eye', 'cateye-shape.png'],
-                ['Rectangle', 'bi-border-width', 'rectangle-shape.png'],
-                ['Oval', 'bi-circle-half', 'oval-shape.png'],
-                ['Wayfarer', 'bi-shield', 'wayfarer-shape.png'],
-                ['Geometric', 'bi-hexagon', 'geometric-shape.png']
+                ['Round', 'bi-circle', 'round-shape.png', 'round'],
+                ['Square', 'bi-square', 'square-shape.png', 'square'],
+                ['Aviator', 'bi-sunglasses', 'aviator-shape.png', 'aviator'],
+                ['Cat-Eye', 'bi-eye', 'cateye-shape.png', 'cateye'],
+                ['Rectangle', 'bi-border-width', 'rectangle-shape.png', 'rectangle'],
+                ['Oval', 'bi-circle-half', 'oval-shape.png', 'oval'],
+                ['Wayfarer', 'bi-shield', 'wayfarer-shape.png', 'wayfarer'],
+                ['Geometric', 'bi-hexagon', 'geometric-shape.png', 'geometric']
             ];
 
             foreach ($shapes as $shape):
             ?>
                 <div class="col-6 col-md-3 col-lg-2 reveal">
-                    <a href="#" class="text-decoration-none">
+                    <!-- ===== LINK TO category.php WITH SHAPE FILTER ===== -->
+                    <a href="category.php?shape=<?php echo $shape[3]; ?>" class="text-decoration-none">
                         <div class="shape-circle mx-auto mb-3 rounded-circle d-flex align-items-center justify-content-center bg-white bg-opacity-10 border border-2 border-white border-opacity-25"
                             style="transition: all 0.4s ease; cursor: pointer; overflow: hidden;">
 
