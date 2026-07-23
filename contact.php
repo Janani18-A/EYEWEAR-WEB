@@ -199,6 +199,7 @@ include 'templates/navbar.php';
     </div>
 </section>
 
+<?php include 'search-overlay.php'; ?>
 <?php include 'templates/footer.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
